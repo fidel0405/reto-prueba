@@ -28,8 +28,8 @@ const getAllUsers = async () => {
     return console.log(count), console.log(users)
 }
 
-const getUserLogin= async(name, password)=> {
-    const count= await User.countDocuments({name: name, password: password})
+const getUserLogin= async(body)=> {
+    const count= await User.countDocuments(body)
     return count
 }
 

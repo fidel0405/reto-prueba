@@ -30,12 +30,9 @@ app.get('', (req, res) => {
 
 app.post('/users', (req, res) => {
 
-    const data = JSON.stringify(req)
-    const name = data.name
-    const password= data.password
-
-    getUserLogin(name,password).then((count) => {
-        if (count=1){
+    getUserLogin(req.body).then((count) => {
+        console.log(count)
+        if (count===1){
             res.render('home')
         } else{
             res.render('index')
