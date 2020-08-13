@@ -1,0 +1,26 @@
+{
+  "name": "Sorteo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/sorteo.js",
+    "dev": "nodemon src/sorteo.js -e js,hbs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "css-loader": "^4.2.1",
+    "express": "^4.16.4",
+    "hbs": "^4.0.1",
+    "mongoose": "^5.3.16",
+    "react": "^16.13.1",
+    "request": "^2.88.0",
+    "validator": "^10.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.2.0"
+  }
+}
