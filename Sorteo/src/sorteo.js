@@ -32,6 +32,10 @@ app.post('/users', (req, res) => {
         password: req.body.password
     })
    res.redirect('/users/userlogic').json(user)
+
+    user.save()
+    res.render('home')
+
 })
 
 app.get('/users', (req, res) => {
