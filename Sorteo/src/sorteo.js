@@ -27,15 +27,18 @@ app.get('', (req, res) => {
 })
 
 app.post('/users', (req, res) => {
-    const user =new User({
-        name: req.body.name,
-        password: req.body.password
-    })
-   res.redirect('/users/userlogic').json(user)
-
-    user.save()
-    res.render('home')
-
+    User.find(
+        { name: req.name },
+        function(err, result) {
+          if (err) {
+            res.send(err);
+          } else {
+            if(!result===null){
+                res.render('home')
+            }
+          }
+        }
+      )
 })
 
 app.get('/users', (req, res) => {
