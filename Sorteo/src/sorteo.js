@@ -28,7 +28,8 @@ app.get('', (req, res) => {
 
 app.post('/users', async (req, res) => {
     User.find(
-        { name: req.body.name },
+        { name: req.body.name,
+          password: req.body.password},
         function(err, result) {
           if (err) {
            res.send(err);
@@ -39,9 +40,9 @@ app.post('/users', async (req, res) => {
           }
         }
       )
-    //res.render('home')
+    res.render('home')
 })
-
+            
 app.get('/users', (req, res) => {
     res.render('index')
 })
