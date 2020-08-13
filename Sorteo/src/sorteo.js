@@ -31,8 +31,7 @@ app.post('/users', (req, res) => {
         name: req.body.name,
         password: req.body.password
     })
-   user.save()
-    res.render('sorteo')
+   res.redirect('/users/userlogic').json(user)
 })
 
 app.get('/users', (req, res) => {

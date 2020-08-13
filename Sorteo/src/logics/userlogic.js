@@ -1,10 +1,25 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const User = require('../models/users')
+const { urlencoded } = require('express')
+const bodyParser = require('body-parser')
+const express = require('express')
+const app= express()
 
-const users= User.find().count
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-
-const UserLog= function(name, password){
-
-}
+app.get('/users/userlogic', (req, res) => {
+    User.find(
+        { name: req.name },
+        function(err, result) {
+          if (err) {
+            res.send(err);
+          } else {
+            if(!result===null){
+                res.redirect('../sorteo')
+            }
+          }
+        }
+      )
+})
