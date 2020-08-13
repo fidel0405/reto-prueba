@@ -3,8 +3,10 @@ const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
 const User = require('./models/users')
+const UserLogin= require('./models/users')
 const { urlencoded } = require('express')
 const bodyParser = require('body-parser')
+const { getUserLogin } = require('./models/users')
 
 //Directorios
 const app= express()
@@ -27,20 +29,26 @@ app.get('', (req, res) => {
 })
 
 app.post('/users', async (req, res) => {
-    User.find(
-        { name: req.body.name,
-          password: req.body.password},
-        function(err, result) {
-          if (err) {
-           res.send(err);
-          } else {
-            if(!result===null){
-            res.render('home')
-            }
-          }
-        }
-      )
-    res.render('home')
+    const login = getUserLogin(req.body.name, req.body.password)
+    if(login>0){
+        res.render('home')
+    }else{
+        res.render('index').send('Usuario o contraseña incorrecta')
+    }
+
+    // User.find(
+    //     { name: req.body.name,
+    //       password: req.body.password},
+    //     function async (err, result) {
+    //       if (err) {
+    //        res.send(err);
+    //       } else {
+    //         if(!result==={}){
+    //         res.render('home')
+    //         }
+    //       }
+    //     }
+    //   )
 })
             
 app.get('/users', (req, res) => {

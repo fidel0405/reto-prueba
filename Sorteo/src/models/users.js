@@ -21,6 +21,24 @@ const User = mongoose.model('User', {
     }
 })
 
+const getAllUsers = async () => {
+    const users = await User.find()
+    const count = await User.countDocuments()
+    return console.log(count), console.log(users)
+}
+
+const getUserLogin= async(name, password)=> {
+    const count= await User.countDocuments({name: name, password: password})
+    return count
+}
+
+const nombre= 'admin'
+const pass= 'superadmin'
+
+const login= getUserLogin(nombre,pass)
+console.log(login)
+
+
 //Usuario de ingreso predeterminado
 
 // const user= new User({
@@ -48,4 +66,5 @@ const User = mongoose.model('User', {
 // console.log(user.password)
 // console.log(userLog.password)
 
-module.exports = User
+module.exports = {User, 
+                getUserLogin}
