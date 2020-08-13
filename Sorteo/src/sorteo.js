@@ -33,8 +33,8 @@ app.post('/users', (req, res) => {
     const user =new User({
         name: req.body.name,
         password: req.body.password
-    }
-    )
+    })
+    
     user.save()
     res.render('sorteo')
 })
