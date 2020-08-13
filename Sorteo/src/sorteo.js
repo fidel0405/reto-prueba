@@ -31,8 +31,8 @@ app.post('/users', (req, res) => {
         name: req.body.name,
         password: req.body.password
     })
-   user.save()
-    res.render('sorteo')
+    user.save()
+    res.render('home')
 })
 
 app.get('/users', (req, res) => {
