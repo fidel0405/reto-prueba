@@ -28,14 +28,23 @@ app.get('', (req, res) => {
     res.render('index')
 })
 
-app.post('/users', async (req, res) => {
-    const login = getUserLogin(req.body.name, req.body.password)
-    if(login>0){
-        res.render('home')
-    }else{
-        res.render('index').send('Usuario o contraseña incorrecta')
-    }
+app.post('/users', (req, res) => {
 
+    const data = JSON.stringify(req)
+    const name = data.name
+    const password= data.password
+
+    getUserLogin(name,password).then((count) => {
+        if (count=1){
+            res.render('home')
+        } else{
+            res.render('index')
+        }
+        console.log(count)
+    }).catch((e) => {
+        console.log(e)
+    })
+    
     // User.find(
     //     { name: req.body.name,
     //       password: req.body.password},

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const e = require('express')
 
 const User = mongoose.model('User', {
     name: {
@@ -32,11 +33,16 @@ const getUserLogin= async(name, password)=> {
     return count
 }
 
+
 const nombre= 'admin'
 const pass= 'superadmin'
 
-const login= getUserLogin(nombre,pass)
-console.log(login)
+// getUserLogin(nombre,pass).then((count) => {
+//     console.log(count)
+// }).catch((e) => {
+//     console.log(e)
+// })
+
 
 
 //Usuario de ingreso predeterminado
