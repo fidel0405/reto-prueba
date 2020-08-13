@@ -28,18 +28,15 @@ app.get('', (req, res) => {
 
 app.post('/users', (req, res) => {
     User.find(
-        { name: req.name },
+        { name: req.body.name },
         function(err, result) {
           if (err) {
             res.send(err);
           } else {
-            if(!result===null){
                 res.render('home')
             }
-          }
-        }
-      )
-})
+          })
+        })
 
 app.get('/users', (req, res) => {
     res.render('index')
