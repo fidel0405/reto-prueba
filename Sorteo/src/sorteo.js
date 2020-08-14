@@ -66,7 +66,7 @@ app.get('/miembros', async (req, res) => {
 app.post('/miembros', async (req, res) => {
     
     const foto = req.file
-    console.log(foto)
+    console.log(req.body)
     const miembro = new Miembro(req.body)
 
     try {
