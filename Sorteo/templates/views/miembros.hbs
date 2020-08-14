@@ -28,6 +28,15 @@
         </div>
         <p>Miembros actuales</p>
 
+    <!-- Aqui va a ir la tabla -->
+    {{#each miembros}}
+    <table class="table table-striped table-bordered bg-white table-sm">
+        <label for="nombre">{{nombre}}</label> <br>
+        <label for="foto">{{foto}}</label><br><br>
+        <li><a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a></li>
+        <li><a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a></li>
+    </table>
+
         <!-- Aqui va a ir la tabla -->
         {{#each miembros}}
         <table class="table table-striped table-bordered bg-white table-sm">
