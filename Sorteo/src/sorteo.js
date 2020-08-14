@@ -76,7 +76,7 @@ app.delete('/miembros/:id', async (req, res) => {
     }
 })
 
-app.patch('/miembros/:id', async (req, res) => {
+app.put('/miembros/:id', async (req, res) => {
 
     try {
         const miembro = await Miembro.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true})
