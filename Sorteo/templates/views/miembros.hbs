@@ -27,12 +27,13 @@
                 </div>
             </form>
         </div>
+    </div>
         <p>Miembros actuales</p>
 
     <!-- Aqui va a ir la tabla -->
 
         <!-- Aqui va a ir la tabla -->
-
+    <div class="col-md-7">
         <table class="table table-striped table-bordered bg-white table-sm">
             <thead>
                 <tr>
@@ -47,7 +48,7 @@
                     <td><label for="nombre">{{nombre}}</label></td>
                     <td><label for="foto">{{foto}}</label></td>
                     <td>
-                        <a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a>
+                        <a href="/updateMiembro/{{_id}}" class="btn btn-success">Actualizar</a>
                         <a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr> 
