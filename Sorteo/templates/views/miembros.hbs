@@ -9,54 +9,56 @@
 </head>
 <body>
     {{>header}}
-    <div class="col-md-5 abs-center justify-content-center align-items-center">
-        <div class="card card-body">
-            <p>Agrega a un nuevo miembro</p> <br>
-            <form action="/miembros" method="POST" >
-                <div class="form-group">
-                    <label for="nombre">Nombre</label> <br>
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control"> <br>
-                </div>
+    <div class="row">
+        <div class="col-md-5 abs-center justify-content-center align-items-center">
+            <div class="card card-body">
+                <p>Agrega a un nuevo miembro</p> <br>
+                <form action="/miembros" method="POST" >
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label> <br>
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control"> <br>
+                    </div>
 
-                <div class="form-group">
-                    <label for="foto">Foto de perfil</label> <br>
-                    <input type="file" name="foto" id="foto"> <br>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary "> Agregar </button>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <label for="foto">Foto de perfil</label> <br>
+                        <input type="file" name="foto" id="foto"> <br>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary "> Agregar </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-        <p>Miembros actuales</p>
-
-    <!-- Aqui va a ir la tabla -->
+            <p>Miembros actuales</p>
 
         <!-- Aqui va a ir la tabla -->
-    <div class="col-md-7">
-        <table class="table table-striped table-bordered bg-white table-sm">
-            <thead>
-                <tr>
-                    <td>Nombre</td>
-                    <td>Foto</td>
-                    <td>Acción</td>
-                </tr>
-            </thead>    
-            <tbody>
-                {{#each miembros}}
-                <tr>
-                    <td><label for="nombre">{{nombre}}</label></td>
-                    <td><label for="foto">{{foto}}</label></td>
-                    <td>
-                        <a href="/updateMiembro/{{_id}}" class="btn btn-success">Actualizar</a>
-                        <a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a>
-                    </td>
-                </tr> 
-                {{/each}} 
-            </tbody>
-        </table>
+
+            <!-- Aqui va a ir la tabla -->
+        <div class="col-md-7">
+            <table class="table table-striped table-bordered bg-white table-sm">
+                <thead>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Foto</td>
+                        <td>Acción</td>
+                    </tr>
+                </thead>    
+                <tbody>
+                    {{#each miembros}}
+                    <tr>
+                        <td><label for="nombre">{{nombre}}</label></td>
+                        <td><label for="foto">{{foto}}</label></td>
+                        <td>
+                            <a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a>
+                            <a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr> 
+                    {{/each}} 
+                </tbody>
+            </table>
 
 
+        </div>
     </div>
     {{>footer}}
 
