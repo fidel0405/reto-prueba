@@ -93,6 +93,23 @@ app.patch('/tasks/:id', async (req, res) => {
 
 //Puerto
 
+app.get('/miembros', (req, res) => {
+    res.render('miembros')
+})
+
+app.get('/vehiculos', (req, res) => {
+    res.render('vehiculos')
+})
+
+app.get('/ganadores', (req, res) => {
+    res.render('ganadores')
+})
+
+app.get('/nuevoSorteo', (req, res) => {
+    res.render('nuevoSorteo')
+})
+
+
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
