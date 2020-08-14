@@ -9,7 +9,7 @@
     {{>header}}
 
     <p>Agrega a un nuevo miembro</p> <br>
-    <form action="/miembros">
+    <form action="/miembros" method="POST" >
         <label for="nombre">Nombre</label> <br>
         <input type="text" name="nombre" id="nombre" placeholder="Nombre"> <br>
 
@@ -25,11 +25,10 @@
     <!-- Aqui va a ir la tabla -->
     {{#each miembros}}
     <table>
-        <tr>
-            <td>{{nombre}}</td>
-            <td>{{foto}}</td>
-            <td><a href="/miembros/{{_id}}">update</a></td>
-        </tr>
+        <label for="nombre">{{nombre}}</label> <br>
+        <label for="foto">{{foto}}</label><br>
+        <li><a href="/updateMiembro/{{_id}}" >Actualizar</a></li>
+        <li><a href="/deleteMiembro/{{_id}}" >Eliminar</a></li>
     </table>
     {{/each}}
 

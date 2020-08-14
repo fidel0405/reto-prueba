@@ -61,14 +61,53 @@ app.get('/miembros', async (req, res) => {
     }
 })
 
-app.delete('/miembros/:id', async (req, res) => {
+app.post('/miembros', async (req, res) => {
+    const miembro = new Miembro(req.body)
+
+    try {
+        await miembro.save()
+        res.redirect('/miembros')
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+app.post('/updateMiembro/:id', async (req, res) => {
+    try {
+        const miembro = await Miembro.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+    
+        if (!miembro) {
+            return res.status(404).send()
+        }
+
+        res.redirect('/miembros')
+
+    } catch (e) {
+        res.status(400).send(e)
+    } 
+})
+
+app.get('/updateMiembro/:id', async (req, res) => {
+    
+    try {
+        const id= req.params.id
+        const miembro= await Miembro.findById(id)
+
+        res.render('updateMiembro', {miembro})
+
+    } catch (e) {
+        res.status(500).send()
+    } 
+})
+
+app.get('/deleteMiembro/:id', async (req, res) => {
     try {
         const miembro = await Miembro.findByIdAndDelete(req.params.id)
 
         if (!miembro) {
             res.status(404).send()
         }else{
-            res.render('miembros')
+            res.redirect('/miembros')
         }
 
     } catch (e) {
@@ -76,20 +115,28 @@ app.delete('/miembros/:id', async (req, res) => {
     }
 })
 
-app.put('/miembros/:id', async (req, res) => {
-
+//Vehiculos
+app.get('/vehiculos', async (req, res) => {
     try {
-        const miembro = await Miembro.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true})
-
-        if (!miembro) {
-            return res.status(404).send()
-        }else{
-            res.render('miembros')
-        }
+        const miembros = await Miembro.find({})
+        const vehiculos= await Vehiculo.find({})
+        res.render('vehiculos',{miembros, vehiculos})
     } catch (e) {
-        res.status(400).send(e)
+        res.status(500).send()
     }
 })
+
+
+
+// app.post('/updateMiembro', async (req, res) => {
+//     try {
+//         const id= req.params.id
+//         const miembro = await Miembro.findById(id)
+//         res.render('updateMiembro',{miembro})
+//     } catch (e) {
+//         res.status(500).send()
+//     }
+// })
 
 //Puerto
 
