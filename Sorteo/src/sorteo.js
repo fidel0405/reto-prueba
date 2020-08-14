@@ -55,7 +55,7 @@ app.get('/users', (req, res) => {
 app.get('/miembros', async (req, res) => {
     try {
         const miembros = await Miembro.find({})
-        res.send(miembros)
+        res.render('miembros',{miembros})
     } catch (e) {
         res.status(500).send()
     }
@@ -76,7 +76,7 @@ app.delete('/miembros/:id', async (req, res) => {
     }
 })
 
-app.patch('/tasks/:id', async (req, res) => {
+app.patch('/miembros/:id', async (req, res) => {
 
     try {
         const miembro = await Miembro.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true})
@@ -92,10 +92,6 @@ app.patch('/tasks/:id', async (req, res) => {
 })
 
 //Puerto
-
-app.get('/miembros', (req, res) => {
-    res.render('miembros')
-})
 
 app.get('/vehiculos', (req, res) => {
     res.render('vehiculos')
