@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miembros</title>
+</head>
+<body>
+    {{>header}}
+
+    <p>Agrega a un nuevo miembro</p> <br>
+    <form action="/miembros">
+        <label for="nombre">Nombre</label> <br>
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre"> <br>
+
+        <label for="foto">Foto de perfil</label> <br>
+        <input type="file" name="foto" id="foto"> <br>
+        
+        <button> Agregar </button>
+
+    </form>
+
+    <p>Miembros actuales</p>
+
+    <!-- Aqui va a ir la tabla -->
+    <table>
+        <tr>
+            <td>Carmen</td>
+            <td>Foto</td>
+        </tr>
+    </table>
+
+
+    {{>footer}}
+
+</body>
+</html>
