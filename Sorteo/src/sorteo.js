@@ -1,6 +1,7 @@
 require('./db/mongoose')
 const path = require('path')
 const express = require('express')
+const fileUpload = require('express-fileupload')
 const hbs = require('hbs')
 const User = require('./models/users')
 const Miembro = require('./models/miembros')
@@ -13,6 +14,7 @@ const { getUserLogin } = require('./models/users')
 
 //Directorios
 const app= express()
+app.use(fileUpload())
 const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
@@ -62,6 +64,9 @@ app.get('/miembros', async (req, res) => {
 })
 
 app.post('/miembros', async (req, res) => {
+    
+    const foto = req.file
+    console.log(foto)
     const miembro = new Miembro(req.body)
 
     try {
