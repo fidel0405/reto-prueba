@@ -120,7 +120,7 @@ app.get('/vehiculos', async (req, res) => {
     try {
         const miembros = await Miembro.find({})
         const vehiculos= await Vehiculo.find({})
-        res.render('miembros',{miembros, vehiculos})
+        res.render('vehiculos',{miembros, vehiculos})
     } catch (e) {
         res.status(500).send()
     }

@@ -8,6 +8,43 @@
 <body>
     {{>header}}
 
+    <p>Agrega a un nuevo miembro</p> <br>
+    <form action="/vehiculos" method="POST" >
+        <label for="marca">Marca</label> <br>
+        <input type="text" name="marca" id="marca" placeholder="Marca"> <br>
+
+        <label for="modelo">Modelo</label> <br>
+        <input type="text" name="modelo" id="modelo" placeholder="Modelo"> <br>
+
+        <label for="year">Año</label> <br>
+        <input type="text" name="year" id="year" placeholder="Año"> <br>
+
+        <label for="propietario">Propietario</label> <br>
+        <select name="propietario_name">
+            {{#each miembros}}
+            <option value="{{id}}">{{nombre}}</option>
+            {{/each}}
+            <input type="hidden" name="propietario_id" value="{{id}}">
+        </select>
+        
+        <button> Agregar </button>
+
+    </form>
+
+    <p>Miembros actuales</p>
+
+    <!-- Aqui va a ir la tabla -->
+    {{#each vehiculos}}
+    <table>
+        <label for="Propietario">{{propietario_name}}</label> <br>
+        <label for="Marca">{{marca}}</label><br>
+        <label for="Modelo">{{modelo}}</label><br>
+        <label for="Year">{{year}}</label><br>
+        <li><a href="/updateVehiculo/{{_id}}" >Actualizar</a></li>
+        <li><a href="/deleteVehiculo/{{_id}}" >Eliminar</a></li>
+    </table>
+    {{/each}}
+
 
     {{>footer}}
 
