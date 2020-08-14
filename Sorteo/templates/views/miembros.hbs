@@ -8,7 +8,7 @@
 </head>
 <body>
     {{>header}}
-    
+    <div class="col-md-5 abs-center justify-content-center align-items-center">
         <div class="card card-body">
             <p>Agrega a un nuevo miembro</p> <br>
             <form action="/miembros" method="POST" >
@@ -42,18 +42,18 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><label for="nombre">{{nombre}}</label> <br></td>
-                    <td><label for="foto">{{foto}}</label><br></td>
+                    <td><label for="nombre">{{nombre}}</label></td>
+                    <td><label for="foto">{{foto}}</label></td>
                     <td>
-                        <li><a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a></li>
-                        <li><a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a></li>
+                        <a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a>
+                        <a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>  
             </tbody>
         </table>
     {{/each}}
 
-
+    </div>
     {{>footer}}
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
