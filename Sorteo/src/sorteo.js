@@ -65,9 +65,11 @@ app.get('/miembros', async (req, res) => {
 
 app.post('/miembros', async (req, res) => {
     
-    const foto = req.file
-    console.log(req.body)
+    //const nombre = req.body.name
+    //const foto = req.file
+    //const foto64 = new Buffer(foto, 'binary').toString('base64');
     const miembro = new Miembro(req.body)
+    //miembro.update({foto: foto64})
 
     try {
         await miembro.save()
@@ -168,7 +170,7 @@ app.get('/deleteVehiculo/:id', async (req, res) => {
 })
 
 app.post('/updateVehiculo/:id', async (req, res) => {
-    
+
     try {
         const miembro = await Miembro.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
     
@@ -183,13 +185,15 @@ app.post('/updateVehiculo/:id', async (req, res) => {
     } 
 })
 
-app.get('/updateMiembro/:id', async (req, res) => {
+app.get('/updateVehiculo/:id', async (req, res) => {
     
     try {
         const id= req.params.id
-        const miembro= await Miembro.findById(id)
+        const vehiculo= await Vehiculo.findById(id)
+        
+        const miembros = await Miembro.find({})
 
-        res.render('updateMiembro', {miembro})
+        res.render('updateVehiculo', {miembros, vehiculo})
 
     } catch (e) {
         res.status(500).send()
@@ -208,6 +212,9 @@ app.get('/updateMiembro/:id', async (req, res) => {
 
 //Puerto
 
+app.get('/vehiculos', (req, res) => {
+    res.render('vehiculos')
+})
 
 app.get('/ganadores', (req, res) => {
     res.render('ganadores')
