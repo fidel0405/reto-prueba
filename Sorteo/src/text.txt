@@ -1,1 +1,1 @@
-/Program Files/MongoDB/Server/4.4/bin/mongod.exe --dbpath=/Program Files/MongoDB-data
+/Users/fidel/MongoDB/Server/4.4/bin/mongod.exe --dbpath=/Users/fidel/MongoDB-data

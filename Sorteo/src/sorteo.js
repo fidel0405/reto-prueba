@@ -12,6 +12,8 @@ const UserLogin= require('./models/users')
 const { urlencoded } = require('express')
 const bodyParser = require('body-parser')
 const { getUserLogin } = require('./models/users')
+const random= require('random')
+const { get } = require('http')
 
 const upload = multer({
     dest: 'images',
@@ -225,30 +227,49 @@ app.get('/updateVehiculo/:id', async (req, res) => {
     } 
 })
 
-// app.post('/updateMiembro', async (req, res) => {
-//     try {
-//         const id= req.params.id
-//         const miembro = await Miembro.findById(id)
-//         res.render('updateMiembro',{miembro})
-//     } catch (e) {
-//         res.status(500).send()
-//     }
-// })
 
-//Puerto
-
-app.get('/vehiculos', (req, res) => {
-    res.render('vehiculos')
+//Sorteo
+app.get('/nuevoSorteo', async (req, res) => {
+    try {
+        const miembros = await Miembro.find({})
+        res.render('nuevoSorteo',{miembros})
+    } catch (e) {
+        res.status(500).send()
+    }
 })
+
+app.post('/nuevoSorteo', async (req, res) => {
+
+    const count = await Miembro.countDocuments()
+
+    try {
+
+        const i= 0
+        const cantPremios= req.body
+        const randomArray= new Array()
+        const data= JSON.parse(cantPremios)
+        //const NP= data.premios
+        console.log(data)
+
+        const numero= random.int(0,count-1)
+        randomArray.push(numero)
+
+            //const existe= randomArray.indexOf(numero)
+        res.send(randomArray)
+
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+//Ganadores
 
 app.get('/ganadores', (req, res) => {
     res.render('ganadores')
 })
 
-app.get('/nuevoSorteo', (req, res) => {
-    res.render('nuevoSorteo')
-})
 
+//Puerto
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)

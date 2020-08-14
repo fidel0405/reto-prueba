@@ -31,7 +31,7 @@
     <!-- Aqui va a ir la tabla -->
 
         <!-- Aqui va a ir la tabla -->
-        {{#each miembros}}
+        
         <table class="table table-striped table-bordered bg-white table-sm">
             <thead>
                 <tr>
@@ -41,6 +41,7 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each miembros}}
                 <tr>
                     <td><label for="nombre">{{nombre}}</label> <br></td>
                     <td><label for="foto"><img src="data:image/jpg;base64,{{foto}}"></label><br></td>
@@ -48,10 +49,11 @@
                         <a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a>
                         <a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a>
                     </td>
-                </tr>  
+                </tr>
+                {{/each}}
             </tbody>
         </table>
-    {{/each}}
+ 
 
 
     {{>footer}}
