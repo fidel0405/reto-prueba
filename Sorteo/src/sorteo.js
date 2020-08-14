@@ -1,4 +1,5 @@
 require('./db/mongoose')
+const multer = require('multer')
 const path = require('path')
 const express = require('express')
 const fileUpload = require('express-fileupload')
@@ -11,6 +12,13 @@ const UserLogin= require('./models/users')
 const { urlencoded } = require('express')
 const bodyParser = require('body-parser')
 const { getUserLogin } = require('./models/users')
+
+const upload = multer({
+    dest: 'images',
+    limits: {
+    fileSize: 1000000
+    }
+})
 
 //Directorios
 const app= express()
@@ -64,18 +72,25 @@ app.get('/miembros', async (req, res) => {
 })
 
 app.post('/miembros', async (req, res) => {
-    
+     
     //const nombre = req.body.name
     //const foto = req.file
     //const foto64 = new Buffer(foto, 'binary').toString('base64');
     const miembro = new Miembro(req.body)
+    miembro.save()
+    const data = req.body.foto
+    const base64data = Buffer.from(data).toString('base64')
     //miembro.update({foto: foto64})
+    const id = miembro._id
+    const nuevoMiembro = await Miembro.findByIdAndUpdate(id, {foto: base64data})
 
     try {
-        await miembro.save()
+        await nuevoMiembro.save()
+        console.log(nuevoMiembro)
         res.redirect('/miembros')
     } catch (e) {
-        res.status(400).send(e)
+        console.log('la cague')
+       // res.status(400).send(e)
     }
 })
 
