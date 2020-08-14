@@ -2,7 +2,13 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 
 const Vehiculo = mongoose.model('Vehiculos', {
-    propietario: {
+    propietario_id: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    propietario_name: {
         type: String,
         required: true,
         trim: true
