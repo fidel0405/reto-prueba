@@ -187,13 +187,23 @@ app.get('/deleteVehiculo/:id', async (req, res) => {
 app.post('/updateVehiculo/:id', async (req, res) => {
 
     try {
-        const miembro = await Miembro.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+
+        const miembro_id= req.body.propietario_id
+        const miembro= await Miembro.findById(miembro_id)
+
+        const vehiculo = await Vehiculo.findByIdAndUpdate(req.params.id,{
+        propietario_id: miembro_id,
+        propietario_name: miembro.nombre,
+        marca: req.body.marca,
+        modelo: req.body.modelo,
+        year: req.body.year
+        })
     
-        if (!miembro) {
+        if (!vehiculo) {
             return res.status(404).send()
         }
 
-        res.redirect('/miembros')
+        res.redirect('/vehiculos')
 
     } catch (e) {
         res.status(400).send(e)
