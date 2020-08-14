@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Vehiculo</title>
+</head>
+<body>
+    <form action="/updateVehiculo/{{vehiculo.id}}" method="POST">
+        <h1>Actualiza los datos</h1>
+       <select name="propietario_id">
+            {{#each miembros}}
+            <option value={{_id}}>{{nombre}}</option>
+            {{/each}}
+        </select><br>
+        Marca: <input type="text" name="marca" value="{{vehiculo.marca}}">
+        Modelo: <input type="text" name="modelo" value="{{vehiculo.modelo}}"> 
+        Año: <input type="text" name="year" value="{{vehiculo.year}}"> 
+        <button>Actualizar</button>
+    </form>
+</body>
+</html>
