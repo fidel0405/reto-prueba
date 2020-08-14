@@ -33,9 +33,19 @@ const getUserLogin= async(body)=> {
     return count
 }
 
+// const user= new User({
+//     name: "admin",
+//     password: "Felizcumpleano"
+// })
+// user.save().then(
+//     console.log('Agregado')
+// ).catch(
+//     console.log('No agregado')
+// )
 
-const nombre= 'admin'
-const pass= 'superadmin'
+
+//const nombre= 'admin'
+//const pass= 'superadmin'
 
 // getUserLogin(nombre,pass).then((count) => {
 //     console.log(count)

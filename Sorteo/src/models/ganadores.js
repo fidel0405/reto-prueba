@@ -7,8 +7,13 @@ const Ganador = mongoose.model('Ganadores', {
         required: true,
         trim: true
     },
+    foto: {
+        type: String,
+        required: true,
+        trim: true
+    },
 
-    premio: {
+    premios: {
         type: String,
         required: true,
         trim: true,

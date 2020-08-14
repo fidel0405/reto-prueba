@@ -3,6 +3,9 @@ const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
 const User = require('./models/users')
+const Miembro = require('./models/miembros')
+const Vehiculo = require('./models/vehiculos')
+const Ganadores = require('./models/ganadores')
 const UserLogin= require('./models/users')
 const { urlencoded } = require('express')
 const bodyParser = require('body-parser')
@@ -24,43 +27,71 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(publicDirectoryPath))
 
 //Metodos
+
+//Usuarios
+
 app.get('', (req, res) => {
     res.render('index')
 })
-
 app.post('/users', (req, res) => {
 
     getUserLogin(req.body).then((count) => {
-        console.log(count)
         if (count===1){
             res.render('home')
         } else{
             res.render('index')
         }
-        console.log(count)
     }).catch((e) => {
         console.log(e)
     })
-    
-    // User.find(
-    //     { name: req.body.name,
-    //       password: req.body.password},
-    //     function async (err, result) {
-    //       if (err) {
-    //        res.send(err);
-    //       } else {
-    //         if(!result==={}){
-    //         res.render('home')
-    //         }
-    //       }
-    //     }
-    //   )
 })
             
 app.get('/users', (req, res) => {
     res.render('index')
 })
 
+//Miembros
+
+app.get('/miembros', async (req, res) => {
+    try {
+        const miembros = await Miembro.find({})
+        res.send(miembros)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+app.delete('/miembros/:id', async (req, res) => {
+    try {
+        const miembro = await Miembro.findByIdAndDelete(req.params.id)
+
+        if (!miembro) {
+            res.status(404).send()
+        }else{
+            res.render('miembros')
+        }
+
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+app.patch('/tasks/:id', async (req, res) => {
+
+    try {
+        const miembro = await Miembro.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true})
+
+        if (!miembro) {
+            return res.status(404).send()
+        }else{
+            res.render('miembros')
+        }
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+//Puerto
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)

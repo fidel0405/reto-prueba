@@ -11,9 +11,30 @@ const Miembro = mongoose.model('Miembros', {
     foto: {
         type: String,
         required: true,
-        minlength: 7,
         trim: true,
     }
 })
+
+// const miembro= new Miembro({
+//     nombre: "Fidel",
+//     foto: "Fotodeprueba"
+// })
+// miembro.save().then(
+//     console.log('Agregado')
+// ).catch(
+//     console.log('No paso nada')
+// )
+
+const insertMiembro= (body)=> {
+    const newMember= new Miembro(body)
+    newMember.save()
+}
+
+// insertMiembro({
+//     nombre: "Fidel",
+//     foto: "foto"
+// })
+
+
 
 module.exports = Miembro

@@ -30,4 +30,17 @@ const Vehiculo = mongoose.model('Vehiculos', {
     }
 })
 
+// const carro= new Vehiculo({
+//         propietario: "Fidel",
+//         marca: "Freedom",
+//         modelo: "Vespa",
+//         year: "2019"
+//     })
+//     carro.save().then(
+//         console.log('Agregado')
+//     ).catch(
+//         console.log('No paso nada')
+//     )
+    
+
 module.exports = Vehiculo
