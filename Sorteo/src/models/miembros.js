@@ -9,7 +9,7 @@ const Miembro = mongoose.model('Miembros', {
     },
 
     foto: {
-        type: String,
+        type: Buffer,
         required: true,
         trim: true,
     }

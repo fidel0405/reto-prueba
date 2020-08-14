@@ -1,4 +1,5 @@
 require('./db/mongoose')
+const multer = require('multer')
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
@@ -61,7 +62,9 @@ app.get('/miembros', async (req, res) => {
     }
 })
 
-app.post('/miembros', async (req, res) => {
+app.post('/miembros', upload.single('foto'), async (req, res) => {
+    const foto = req.file.buffer
+    console.log(foto)
     const miembro = new Miembro(req.body)
 
     try {
