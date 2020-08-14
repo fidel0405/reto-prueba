@@ -115,6 +115,17 @@ app.get('/deleteMiembro/:id', async (req, res) => {
     }
 })
 
+//Vehiculos
+app.get('/vehiculos', async (req, res) => {
+    try {
+        const miembros = await Miembro.find({})
+        const vehiculos= await Vehiculo.find({})
+        res.render('miembros',{miembros, vehiculos})
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 
 
 // app.post('/updateMiembro', async (req, res) => {
