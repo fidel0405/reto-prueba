@@ -11,7 +11,7 @@
     
         <div class="card card-body">
             <p>Agrega a un nuevo miembro</p> <br>
-            <form action="/miembros" method="POST" >
+            <form action="/miembros" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nombre">Nombre</label> <br>
                     <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control"> <br>
@@ -51,6 +51,11 @@
                     </td>
                 </tr>
                 {{/each}}
+                    <td><img width="100" height="100" src="/img/{{foto}}"></td>
+                    
+                    <td><a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a></td>
+                    <td><a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a></td>
+                </tr>  
             </tbody>
         </table>
  

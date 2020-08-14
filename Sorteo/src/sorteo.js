@@ -1,8 +1,6 @@
 require('./db/mongoose')
-const multer = require('multer')
 const path = require('path')
 const express = require('express')
-const fileUpload = require('express-fileupload')
 const hbs = require('hbs')
 const User = require('./models/users')
 const Miembro = require('./models/miembros')
@@ -14,17 +12,11 @@ const bodyParser = require('body-parser')
 const { getUserLogin } = require('./models/users')
 const random= require('random')
 const { get } = require('http')
+const multer = require('multer')
 
-const upload = multer({
-    dest: 'images',
-    limits: {
-    fileSize: 1000000
-    }
-})
 
 //Directorios
 const app= express()
-app.use(fileUpload())
 const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
@@ -37,6 +29,19 @@ hbs.registerPartials(partialsPath)
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(publicDirectoryPath))
+
+//middlewares
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, '../public/img'),
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+})
+
+app.use(multer({
+    storage,
+    dest: path.join(__dirname, '../public/img')
+}).single('foto'));
 
 //Metodos
 
@@ -78,17 +83,15 @@ app.post('/miembros', async (req, res) => {
     //const nombre = req.body.name
     //const foto = req.file
     //const foto64 = new Buffer(foto, 'binary').toString('base64');
-    const miembro = new Miembro(req.body)
-    miembro.save()
-    const data = req.body.foto
-    const base64data = Buffer.from(data).toString('base64')
+    const nombre = req.body.nombre
+    const foto = req.file.originalname
+    const objeto = {nombre, foto}
+
+    const miembro = new Miembro(objeto)
     //miembro.update({foto: foto64})
-    const id = miembro._id
-    const nuevoMiembro = await Miembro.findByIdAndUpdate(id, {foto: base64data})
 
     try {
-        await nuevoMiembro.save()
-        console.log(nuevoMiembro)
+        await miembro.save()
         res.redirect('/miembros')
     } catch (e) {
         console.log('la cague')
