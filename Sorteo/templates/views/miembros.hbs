@@ -23,12 +23,14 @@
     <p>Miembros actuales</p>
 
     <!-- Aqui va a ir la tabla -->
+    {{#each miembros}}
     <table>
         <tr>
-            <td>Carmen</td>
-            <td>Foto</td>
+            <td>{{nombre}}</td>
+            <td>{{foto}}</td>
         </tr>
     </table>
+    {{/each}}
 
 
     {{>footer}}
