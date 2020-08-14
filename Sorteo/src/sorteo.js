@@ -57,7 +57,8 @@ app.get('/users', (req, res) => {
 app.get('/miembros', async (req, res) => {
     try {
         const miembros = await Miembro.find({})
-        res.render('miembros',{miembros})
+        const base64Image = new Buffer(miembros.foto, 'binary').toString('base64');
+        res.render('miembros',{miembros, base64Image})
     } catch (e) {
         res.status(500).send()
     }
@@ -66,6 +67,7 @@ app.get('/miembros', async (req, res) => {
 app.post('/miembros', async (req, res) => {
     
     const foto = req.file
+    const base64Image = new Buffer(foto, 'binary').toString('base64');
     console.log(req.body)
     const miembro = new Miembro(req.body)
 

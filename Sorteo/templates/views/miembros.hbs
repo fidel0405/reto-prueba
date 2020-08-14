@@ -29,10 +29,13 @@
     <!-- Aqui va a ir la tabla -->
     {{#each miembros}}
     <table>
-        <label for="nombre">{{nombre}}</label> <br>
-        <label for="foto">{{foto}}</label><br>
-        <li><a href="/updateMiembro/{{_id}}" >Actualizar</a></li>
-        <li><a href="/deleteMiembro/{{_id}}" >Eliminar</a></li>
+        <tr>
+            <td>{{nombre}}</td>
+            {{foto = new Buffer(miembros.foto, 'binary').toString('base64');}}
+            <td><img src="data:image/jpg;base64,{{base64Image}}"></td>
+            <td><a href="/updateMiembro/{{_id}}" >Actualizar</a></td>
+            <td><a href="/deleteMiembro/{{_id}}" >Eliminar</a></td>
+        </tr>
     </table>
     {{/each}}
 
