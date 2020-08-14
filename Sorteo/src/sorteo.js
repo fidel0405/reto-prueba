@@ -129,6 +129,44 @@ app.get('/vehiculos', async (req, res) => {
     }
 })
 
+app.post('/vehiculos', async (req, res) => {
+
+    const miembro_id= req.body.propietario_id
+    const miembro= await Miembro.findById(miembro_id)
+
+    console.log(miembro_id + miembro.nombre)
+
+    const vehiculo = new Vehiculo({
+        propietario_id: miembro_id,
+        propietario_name: miembro.nombre,
+        marca: req.body.marca,
+        modelo: req.body.modelo,
+        year: req.body.year
+    })
+
+    try {
+        await vehiculo.save()
+        res.redirect('/vehiculos')
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+app.get('/deleteVehiculo/:id', async (req, res) => {
+    try {
+        const vehiculo = await Vehiculo.findByIdAndDelete(req.params.id)
+
+        if (!vehiculo) {
+            res.status(404).send()
+        }else{
+            res.redirect('/vehiculos')
+        }
+
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 
 
 // app.post('/updateMiembro', async (req, res) => {
@@ -143,9 +181,6 @@ app.get('/vehiculos', async (req, res) => {
 
 //Puerto
 
-app.get('/vehiculos', (req, res) => {
-    res.render('vehiculos')
-})
 
 app.get('/ganadores', (req, res) => {
     res.render('ganadores')
