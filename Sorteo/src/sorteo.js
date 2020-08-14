@@ -248,16 +248,19 @@ app.post('/nuevoSorteo', async (req, res) => {
     try {
 
         const i= 0
-        const cantPremios= req.body
+        const cantPremios= req.body.premios
         const randomArray= new Array()
-        const data= JSON.parse(cantPremios)
-        //const NP= data.premios
-        console.log(data)
 
-        const numero= random.int(0,count-1)
-        randomArray.push(numero)
-
-            //const existe= randomArray.indexOf(numero)
+        while(i<cantPremios){
+            const numero= random.int(0,count-1)
+            const existe= randomArray.indexOf(numero)
+            if(existe===-1){
+                randomArray.push(numero)
+                i++  
+            }else{
+                i=i
+            }
+        }
         res.send(randomArray)
 
     } catch (e) {
