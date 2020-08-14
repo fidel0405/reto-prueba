@@ -11,7 +11,6 @@ const Miembro = mongoose.model('Miembros', {
     foto: {
         type: Buffer,
         required: true,
-        trim: true,
     }
 })
 
