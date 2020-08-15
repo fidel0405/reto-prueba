@@ -24,5 +24,41 @@ ul {
   }
 
   body {
-      background-color: gray;
+    align-items: center;
+    font-size: small;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
+
+  .btn-css {
+    border: 2px solid gray;
+    background-color: gray;
+    color: skyblue;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 200px;
+    align-self: center;
+    margin: auto;
+  }
+ 
+  .success {
+    border-color: gray;
+    color: skyblue;
+  }
+
+  .success:hover {
+    background-color: skyblue;
+    color: darkblue;
+  }
+
+  a{
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
