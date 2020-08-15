@@ -1,7 +1,6 @@
 require('./db/mongoose')
 const path = require('path')
 const express = require('express')
-const fileUpload = require('express-fileupload')
 const hbs = require('hbs')
 const User = require('./models/users')
 const Miembro = require('./models/miembros')
@@ -11,10 +10,13 @@ const UserLogin= require('./models/users')
 const { urlencoded } = require('express')
 const bodyParser = require('body-parser')
 const { getUserLogin } = require('./models/users')
+const random= require('random')
+const { get } = require('http')
+const multer = require('multer')
+
 
 //Directorios
 const app= express()
-app.use(fileUpload())
 const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
@@ -27,6 +29,19 @@ hbs.registerPartials(partialsPath)
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(publicDirectoryPath))
+
+//middlewares
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, '../public/img'),
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+})
+
+app.use(multer({
+    storage,
+    dest: path.join(__dirname, '../public/img')
+}).single('foto'));
 
 //Metodos
 
@@ -64,18 +79,23 @@ app.get('/miembros', async (req, res) => {
 })
 
 app.post('/miembros', async (req, res) => {
-    
+     
     //const nombre = req.body.name
     //const foto = req.file
     //const foto64 = new Buffer(foto, 'binary').toString('base64');
-    const miembro = new Miembro(req.body)
+    const nombre = req.body.nombre
+    const foto = req.file.originalname
+    const objeto = {nombre, foto}
+
+    const miembro = new Miembro(objeto)
     //miembro.update({foto: foto64})
 
     try {
         await miembro.save()
         res.redirect('/miembros')
     } catch (e) {
-        res.status(400).send(e)
+        console.log('la cague')
+       // res.status(400).send(e)
     }
 })
 
@@ -210,30 +230,52 @@ app.get('/updateVehiculo/:id', async (req, res) => {
     } 
 })
 
-// app.post('/updateMiembro', async (req, res) => {
-//     try {
-//         const id= req.params.id
-//         const miembro = await Miembro.findById(id)
-//         res.render('updateMiembro',{miembro})
-//     } catch (e) {
-//         res.status(500).send()
-//     }
-// })
 
-//Puerto
-
-app.get('/vehiculos', (req, res) => {
-    res.render('vehiculos')
+//Sorteo
+app.get('/nuevoSorteo', async (req, res) => {
+    try {
+        const miembros = await Miembro.find({})
+        res.render('nuevoSorteo',{miembros})
+    } catch (e) {
+        res.status(500).send()
+    }
 })
+
+app.post('/nuevoSorteo', async (req, res) => {
+
+    const count = await Miembro.countDocuments()
+
+    try {
+
+        const i= 0
+        const cantPremios= req.body.premios
+        const randomArray= new Array()
+
+        while(i<cantPremios){
+            const numero= random.int(0,count-1)
+            const existe= randomArray.indexOf(numero)
+            if(existe===-1){
+                randomArray.push(numero)
+                i++  
+            }else{
+                i=i
+            }
+        }
+        res.send(randomArray)
+
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+//Ganadores
 
 app.get('/ganadores', (req, res) => {
     res.render('ganadores')
 })
 
-app.get('/nuevoSorteo', (req, res) => {
-    res.render('nuevoSorteo')
-})
 
+//Puerto
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
