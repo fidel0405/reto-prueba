@@ -301,8 +301,13 @@ app.post('/nuevoSorteo', async (req, res) => {
 
 //Ganadores
 
-app.get('/ganadores', (req, res) => {
-    res.render('ganadores')
+app.get('/ganadores', async (req, res) => {
+    try {
+        const ganadores = await Ganador.find({})
+        res.render('ganadores',{ganadores})
+    } catch (e) {
+        res.status(500).send()
+    }
 })
 
 
