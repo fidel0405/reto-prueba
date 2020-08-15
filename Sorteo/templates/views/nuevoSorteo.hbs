@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NuevoSorteo</title>
+    <link rel="stylesheet" href="/css/miembros.css">
     <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
 </head>
 <body>
@@ -16,30 +17,41 @@
     <!-- Aqui va a ir la tabla -->
 
         <!-- Aqui va a ir la tabla -->
-        
-        <table class="table table-striped table-bordered bg-white table-sm">
-            <thead>
-                <tr>
-                    <td>Nombre</td>
-                    <td>Foto</td>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each miembros}}
-                <tr>
-                    <td><label for="nombre">{{nombre}}</label> <br></td>
-                    <td><label for="foto"><img src="data:image/jpg;base64,{{foto}}"></label><br></td>
-                </tr>  
-                {{/each}}
-            </tbody>
-        </table>
+
+     <div class="row"; style="margin: auto auto"></div>  
+        <div class="col-md-5 abs-center justify-content-center align-items-center">
+            <table class="table table-striped table-bordered bg-white table-sm">
+                <thead>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Foto</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each miembros}}
+                    <tr>
+                        <td><label for="nombre">{{nombre}}</label> <br></td>
+                        <td><label for="foto"><img src="data:image/jpg;base64,{{foto}}"></label><br></td>
+                    </tr>  
+                    {{/each}}
+                </tbody>
+            </table>
     
+        </div>
 
-    <form action="/nuevoSorteo" method="POST">
-    Cantidad de premios: <input type="number" name="premios">
-    <button>Sortear</button>
-    </form>
-
+        <div class="col-md-7 abs-center justify-content-center align-items-center">
+            <div class="card card-body">
+                <form action="/nuevoSorteo" method="POST">
+                <div class="form-group">
+                    Cantidad de premios: <input type="number" name="premios" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary ">Sortear</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     {{>footer}}
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

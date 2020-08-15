@@ -253,8 +253,10 @@ app.post('/nuevoSorteo', async (req, res) => {
     
             for(i=0;i<cantPremios;i++){
                 numero= random.int(0,count)
-                randomArray.push(numero)
-            }
+                const miembros = await Miembro.find({}) 
+                ganador= miembros[numero]
+                randomArray.push(ganador)
+            }    
     
             res.send(randomArray)
     
@@ -262,6 +264,8 @@ app.post('/nuevoSorteo', async (req, res) => {
             res.status(500).send()
         }
 
+
+        
     } else {
         res.send('no puede haber mas premios que miembros')
     }

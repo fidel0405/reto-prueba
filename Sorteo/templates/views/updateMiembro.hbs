@@ -4,13 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update</title>
+    <link rel="stylesheet" href="/css/miembros.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
 </head>
 <body>
-    <form action="/updateMiembro/{{miembro.id}}" method="POST">
-        <h1>Actualiza los datos</h1>
-        Nombre: <input type="text" name="nombre" value="{{miembro.nombre}}">
-        foto: <input type="text" name="foto" value="{{miembro.foto}}"> 
-        <button>Actualizar</button>
-    </form>
+    <div class="col-md-4 offset-md-4">
+        <div class="card card-body">
+            <form action="/updateMiembro/{{miembro.id}}" method="POST">
+                <h1>Actualiza los datos</h1>
+                <div class="form-group">
+                    Nombre: <input type="text" name="nombre" value="{{miembro.nombre}}" class="form-control"> 
+                </div>
+                <div class="form-group">
+                    foto: <input type="text" name="foto" value="{{miembro.foto}}"> 
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
 </body>
 </html>
