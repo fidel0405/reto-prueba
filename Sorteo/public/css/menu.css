@@ -29,15 +29,19 @@ ul {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     margin: auto;
-    background: #232526;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    background-image: url("daslogo.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
   }
 
   .btn-css {
     border: 2px solid gray;
     background-color: gray;
-    color: skyblue;
+    color: white;
     padding: 14px;
     font-size: 16px;
     border-radius: 25px;
@@ -49,7 +53,7 @@ ul {
  
   .success {
     border-color: gray;
-    color: skyblue;
+    color: white;
   }
 
   .success:hover {
