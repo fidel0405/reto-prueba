@@ -267,16 +267,6 @@ app.post('/nuevoSorteo', async (req, res) => {
         }
 
         res.send({randomArray, premiosArray})
-            const randomArray= new Array()
-    
-            for(i=0;i<cantPremios;i++){
-                numero= random.int(0,count)
-                const miembros = await Miembro.find({}) 
-                ganador= miembros[numero]
-                randomArray.push(ganador)
-            }    
-    
-            res.send(randomArray)
     
         } catch (e) {
             res.status(500).send()
