@@ -15,29 +15,29 @@
             <p>Agrega a un nuevo miembro</p> <br>
             <form action="/vehiculos" method="POST" >
                 <div class="form-group">
-                    <select name="propietario_id" class="form-group">
+                    <select name="propietario_id" class="form-control">
                         {{#each miembros}}
                         <option value={{_id}}>{{nombre}}</option>
                         {{/each}}
                     </select>
                 </div>
                 <div class="form-group" >
-                    <label for="marca">Marca</label>
-                    <input type="text" name="marca" id="marca" placeholder="Marca" class="form-group">
+                    <label for="marca">Marca</label><br>
+                    <input type="text" name="marca" id="marca" class="form-control">
                 </div>
                 <div class="form-group" >
-                    <label for="modelo">Modelo</label>
-                    <input type="text" name="modelo" id="modelo" placeholder="Modelo" class="form-group">
+                    <label for="modelo">Modelo</label><br>
+                    <input type="text" name="modelo" id="modelo" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="year">Año</label>
-                    <input type="text" name="year" id="year" placeholder="Año" class="form-group">
+                    <label for="year">Año</label><br>
+                    <input type="text" name="year" id="year" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="propietario">Propietario</label>
                 </div>
                 <div class="form-group" >
-                    <button type="submit" class="form-group"> Agregar </button>
+                    <button type="submit" class="btn btn-primary"> Agregar </button>
                 </div>
                 
             </form>
@@ -69,8 +69,8 @@
                 <td><label for="Modelo">{{modelo}}</label></td>
                 <td><label for="Year">{{year}}</label></td>
                 <td>
-                    <a href="/updateVehiculo/{{_id}}" >Actualizar</a>
-                    <a href="/deleteVehiculo/{{_id}}" >Eliminar</a>
+                    <a href="/updateVehiculo/{{_id}}" class="btn btn-secondary">Actualizar</a>
+                    <a href="/deleteVehiculo/{{_id}}" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
             {{/each}}
