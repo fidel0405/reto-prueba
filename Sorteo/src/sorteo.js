@@ -244,22 +244,28 @@ app.get('/nuevoSorteo', async (req, res) => {
 app.post('/nuevoSorteo', async (req, res) => {
 
     const count = await Miembro.countDocuments()
+    const cantPremios= req.body.premios
 
-    try {
+    if (count <= cantPremios) {
+        try {
   
-        const cantPremios= req.body.premios
-        const randomArray= new Array()
-
-        for(i=0;i<cantPremios;i++){
-            numero= random.int(0,count)
-            randomArray.push(numero)
+            const randomArray= new Array()
+    
+            for(i=0;i<cantPremios;i++){
+                numero= random.int(0,count)
+                randomArray.push(numero)
+            }
+    
+            res.send(randomArray)
+    
+        } catch (e) {
+            res.status(500).send()
         }
 
-        res.send(randomArray)
-
-    } catch (e) {
-        res.status(500).send()
+    } else {
+        res.send('no puede haber mas premios que miembros')
     }
+    
 })
 
 //Ganadores
