@@ -246,21 +246,15 @@ app.post('/nuevoSorteo', async (req, res) => {
     const count = await Miembro.countDocuments()
 
     try {
-
-        const i= 0
+  
         const cantPremios= req.body.premios
         const randomArray= new Array()
 
-        while(i<cantPremios){
-            const numero= random.int(0,count-1)
-            const existe= randomArray.indexOf(numero)
-            if(existe===-1){
-                randomArray.push(numero)
-                i++  
-            }else{
-                i=i
-            }
+        for(i=0;i<cantPremios;i++){
+            numero= random.int(0,count)
+            randomArray.push(numero)
         }
+
         res.send(randomArray)
 
     } catch (e) {
