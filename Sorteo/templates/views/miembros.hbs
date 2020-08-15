@@ -44,17 +44,12 @@
                 {{#each miembros}}
                 <tr>
                     <td><label for="nombre">{{nombre}}</label> <br></td>
-                    <td><label for="foto"><img src="data:image/jpg;base64,{{foto}}"></label><br></td>
-                    <td>
-                        <a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a>
-                        <a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a>
-                    </td>
-                </tr>
-                {{/each}}
                     <td><img width="100" height="100" src="/img/{{foto}}"></td>
                     
                     <td><a href="/updateMiembro/{{_id}}" class="btn btn-secondary">Actualizar</a></td>
                     <td><a href="/deleteMiembro/{{_id}}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+                {{/each}}
                 </tr>  
             </tbody>
         </table>
