@@ -13,6 +13,7 @@ const { getUserLogin } = require('./models/users')
 const random= require('random')
 const { get } = require('http')
 const multer = require('multer')
+const Ganador = require('./models/ganadores')
 
 
 //Directorios
@@ -246,12 +247,13 @@ app.post('/nuevoSorteo', async (req, res) => {
     const count = await Miembro.countDocuments()
     const cantPremios= req.body.premios
 
-    if (count <= cantPremios) {
+    if (count >= cantPremios) {
         try {
   
         const cantPremios= req.body.premios
         const randomArray= new Array()
         const premiosArray= new Array()
+        const ganadoresArray= new Array()
 
         for(i=1;i<=cantPremios;i++){
 
@@ -266,7 +268,25 @@ app.post('/nuevoSorteo', async (req, res) => {
             randomArray.push(ganador)
         }
 
-        res.send({randomArray, premiosArray})
+        for(i=0;i<cantPremios;i++){
+            
+            const persona= randomArray[i]
+
+            const ganador= persona.nombre
+            const foto= persona.foto
+            const premios= premiosArray[i]
+            const fecha= new Date()
+
+            const objeto ={ganador,foto,premios,fecha}
+            const ganadorSave= new Ganador(objeto)
+
+            ganadoresArray.push(ganadorSave)
+
+            await ganadorSave.save()
+
+        }
+
+        res.render('sorteoRealizado',{ganadoresArray})
     
         } catch (e) {
             res.status(500).send()
